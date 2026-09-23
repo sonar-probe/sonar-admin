@@ -154,6 +154,14 @@ const PingNodesForm: React.FC<{ nodeUuid: string; onDone: () => void }> = ({
     });
   };
 
+  const selectAll = () => {
+    const next = new Set<string>();
+    for (const p of presets?.provinces ?? []) {
+      for (const c of presets?.carriers ?? []) next.add(nodeKey(p.code, c.code));
+    }
+    setBuiltinChecked(next);
+  };
+
   const clearAll = () => setBuiltinChecked(new Set());
 
   const handleSubmit = () => {
@@ -218,6 +226,9 @@ const PingNodesForm: React.FC<{ nodeUuid: string; onDone: () => void }> = ({
           </Flex>
         </div>
         <Flex gap="2" wrap="wrap" className="mb-2">
+          <Button size="1" variant="soft" onClick={selectAll}>
+            {t("common.select_all")}
+          </Button>
           <Button size="1" variant="soft" onClick={clearAll}>
             {t("common.deselect_all")}
           </Button>
