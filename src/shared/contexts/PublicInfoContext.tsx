@@ -1,37 +1,10 @@
 import React from "react";
-import defaultTheme from "@/../komari-theme.json";
 //import { useRPC2Call } from "./RPC2Context";
 
-type ThemeField = {
-  key?: string;
-  default?: unknown;
-};
-
-const defaultThemeSettings = Object.fromEntries(
-  (
-    (defaultTheme.configuration?.data ?? []) as ThemeField[]
-  )
-    .filter(
-      (field) =>
-        typeof field.key === "string" &&
-        Object.prototype.hasOwnProperty.call(field, "default"),
-    )
-    .map((field) => [field.key, field.default]),
-);
-
-const withThemeDefaults = (publicInfo: PublicInfo): PublicInfo => {
-  if (publicInfo.theme !== "default") {
-    return publicInfo;
-  }
-
-  return {
-    ...publicInfo,
-    theme_settings: {
-      ...defaultThemeSettings,
-      ...(publicInfo.theme_settings ?? {}),
-    },
-  };
-};
+// The admin console has no installed theme of its own and doesn't render
+// public pages, so unlike the theme frontend it does not merge a default
+// theme's configured field defaults into theme_settings here.
+const withThemeDefaults = (publicInfo: PublicInfo): PublicInfo => publicInfo;
 
 export interface PublicInfo {
   cors_origin_check_enabled: boolean;
