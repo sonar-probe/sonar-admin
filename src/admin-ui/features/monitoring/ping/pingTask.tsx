@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { TaskView } from "./pingTask_Task";
 import { ServerView } from "./pingTask_Server";
+import { BuiltinView } from "./pingTask_Builtin";
 
 const PingTask = () => {
   return (
@@ -53,12 +54,16 @@ const InnerLayout = () => {
         <label className="text-2xl font-bold">{t("ping.title")}</label>
         <AddButton />
       </div>
-      <Tabs.Root defaultValue="task" className="km-pingtask-nav">
+      <Tabs.Root defaultValue="builtin" className="km-pingtask-nav">
         <Tabs.List>
+          <Tabs.Trigger value="builtin">{t("ping.builtin_view")}</Tabs.Trigger>
           <Tabs.Trigger value="task">{t("ping.task_view")}</Tabs.Trigger>
           <Tabs.Trigger value="server">{t("ping.server_view")}</Tabs.Trigger>
         </Tabs.List>
         <Box pt="3">
+          <Tabs.Content value="builtin" className="km-pingtask-view">
+            <BuiltinView pingTasks={pingTasks ?? []} />
+          </Tabs.Content>
           <Tabs.Content value="task" className="km-pingtask-view">
             <TaskView pingTasks={pingTasks ?? []} />
           </Tabs.Content>
