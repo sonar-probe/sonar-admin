@@ -270,6 +270,7 @@
     "added_successfully": "成功添加",
     "all": "所有",
     "annual": "年",
+    "apply": "应用",
     "appearance": "外观",
     "batch_edit": "批量修改",
     "biennial": "两年",
@@ -773,6 +774,7 @@
   "ping": {
     "all_servers": "全部服务器",
     "all_servers_description": "勾选后，当前和后续新增的服务器都会开启该监测。",
+    "builtin_only_carrier": "只选{{carrier}}",
     "default_on": "默认开启",
     "default_on_description": "开启后，新加入的服务器会自动启用此监测；已存在的服务器不受影响。",
     "default_on_short": "默认开启",
@@ -782,6 +784,13 @@
     "task": "任务",
     "task_view": "任务视图",
     "title": "延迟监测"
+  },
+  "pingNodes": {
+    "button": "设置监测节点",
+    "builtinSection": "内置节点",
+    "builtinSectionSub": "全国 31 省 · 电信/联通/移动",
+    "customSection": "自建节点",
+    "title": "设置监测节点"
   },
   "plugin": {
     "config": "配置",

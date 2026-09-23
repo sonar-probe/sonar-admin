@@ -425,6 +425,7 @@
     "added_successfully": "Added successfully",
     "all": "All",
     "annual": "Annual",
+    "apply": "Apply",
     "appearance": "Appearance",
     "batch_edit": "Batch Edit",
     "biennial": "Biennial",
@@ -768,6 +769,7 @@
   "ping": {
     "all_servers": "All servers",
     "all_servers_description": "When enabled, current and future servers will run this monitor.",
+    "builtin_only_carrier": "{{carrier}} only",
     "default_on": "Default on for new servers",
     "default_on_description": "When enabled, newly added servers will automatically start running this monitor. Existing servers are unaffected.",
     "default_on_short": "Default on",
@@ -777,6 +779,13 @@
     "task": "Task",
     "task_view": "Task View",
     "title": "Latency"
+  },
+  "pingNodes": {
+    "button": "Configure monitored nodes",
+    "builtinSection": "Built-in nodes",
+    "builtinSectionSub": "31 provinces · Telecom/Unicom/Mobile",
+    "customSection": "Custom nodes",
+    "title": "Configure monitored nodes"
   },
   "plugin": {
     "config": "Configuration",
