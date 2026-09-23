@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { TaskView } from "./pingTask_Task";
 import { ServerView } from "./pingTask_Server";
-import { BuiltinView } from "./pingTask_Builtin";
+import { useBuiltinPingTargets } from "@/admin-ui/hooks/useBuiltinPingPresets";
 
 const PingTask = () => {
   return (
@@ -41,6 +41,7 @@ const InnerLayout = () => {
   const { isLoading: nodeDetailLoading, error: nodeDetailError } =
     useNodeDetails();
   const { t } = useTranslation();
+  const builtinTargets = useBuiltinPingTargets();
 
   if (isLoading || nodeDetailLoading) {
     return <Loading />;
@@ -48,27 +49,30 @@ const InnerLayout = () => {
   if (error || nodeDetailError) {
     return <div>{error || nodeDetailError}</div>;
   }
+
+  // 内置节点（全国31省市三网延迟检测）现在只在服务器列表的"设置监测节点"
+  // 弹窗里配置，这里只管用户自己添加的任务，靠 target 匹配过滤掉内置的。
+  const customPingTasks = (pingTasks ?? []).filter(
+    (task) => !task.target || !builtinTargets.has(task.target)
+  );
+
   return (
     <Flex direction="column" gap="4" className="km-page-admin-pingtask p-4">
       <div className="flex justify-between items-center">
         <label className="text-2xl font-bold">{t("ping.title")}</label>
         <AddButton />
       </div>
-      <Tabs.Root defaultValue="builtin" className="km-pingtask-nav">
+      <Tabs.Root defaultValue="task" className="km-pingtask-nav">
         <Tabs.List>
-          <Tabs.Trigger value="builtin">{t("ping.builtin_view")}</Tabs.Trigger>
           <Tabs.Trigger value="task">{t("ping.task_view")}</Tabs.Trigger>
           <Tabs.Trigger value="server">{t("ping.server_view")}</Tabs.Trigger>
         </Tabs.List>
         <Box pt="3">
-          <Tabs.Content value="builtin" className="km-pingtask-view">
-            <BuiltinView pingTasks={pingTasks ?? []} />
-          </Tabs.Content>
           <Tabs.Content value="task" className="km-pingtask-view">
-            <TaskView pingTasks={pingTasks ?? []} />
+            <TaskView pingTasks={customPingTasks} />
           </Tabs.Content>
           <Tabs.Content value="server" className="km-pingtask-view">
-            <ServerView pingTasks={pingTasks ?? []} />
+            <ServerView pingTasks={customPingTasks} />
           </Tabs.Content>
         </Box>
       </Tabs.Root>

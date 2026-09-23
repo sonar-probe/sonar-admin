@@ -87,6 +87,7 @@ import {
 import { useSettings } from "@/admin-ui/api/settings";
 import { SelectOrInput } from "@/shared/ui/select-or-input";
 import { useRPC2Call } from "@/shared/contexts/RPC2Context";
+import { PingNodesButton } from "./PingNodesDialog";
 
 
 const NodeDetailsPage = () => {
@@ -1235,6 +1236,7 @@ const ActionButtons = ({
         isSnapshotBackend={isSnapshotBackend}
       />
       <EditButton node={node} />
+      <PingNodesButton nodeUuid={node.uuid} nodeName={node.name} />
       <BillingButton node={node} />
       <DeleteButton node={node} />
     </div>
