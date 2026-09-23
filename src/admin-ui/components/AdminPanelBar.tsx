@@ -448,7 +448,7 @@ const AdminPanelBar = ({ content }: AdminPanelBarProps) => {
                 className="flex items-center gap-2"
               >
                 <img
-                  src="/assets/pwa-icon.webp"
+                  src={`${import.meta.env.BASE_URL}assets/pwa-icon.webp`}
                   alt="Sonar"
                   className="size-6 object-contain"
                 />
